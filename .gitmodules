@@ -1,0 +1,3 @@
+[submodule "EnchantNetCore"]
+	path = EnchantNetCore
+	url = https://github.com/FCL-Team/EnchantNetCore.git

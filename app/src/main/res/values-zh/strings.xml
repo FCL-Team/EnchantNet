@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Frontend UI text -->
+
+    <string name="bar_host">EnchantNet 房主</string>
+    <string name="bar_guest">EnchantNet 访客</string>
+
+    <string name="menu_about">关于</string>
+    <string name="menu_back">返回</string>
+
+    <string name="dialog_about_title">关于 EnchantNet</string>
+    <string name="dialog_about_msg">版本：%s\n开发者：%s\n\nEnchantNet 是一个适用于 Android 平台的 Minecraft: Java Edition 联机工具，该软件支持所 Android 启动器，且无需搭配任何联机模组。\n使用方法简单、支持与 HMCL (Terracotta) 和 PCL2 CE 互联，是该软件的优点。</string>
+
+    <string name="action_ok">确定</string>
+    <string name="action_copy_invite">邀请码已复制到剪切板</string>
+    <string name="action_copy_address">备用服务器地址已复制到剪切板</string>
+
+    <string name="dialog_permission_title">授予权限</string>
+    <string name="dialog_permission_msg">为了确保 EnchantNet 联机功能正常工作，我们需要申请以下权限：\n\n前台服务权限（保证网络连接持续）\n设备连接标识（用于创建或加入房间）\n通知权限（用于展示连接状态）\n忽略电池优化（防止系统后台中断连接）\nVPN 权限（用于创建连接）\n\n请授予软件权限</string>
+    <string name="dialog_permission_grant">授权</string>
+
+    <string name="dialog_permission_deny_title">权限被拒绝</string>
+    <string name="dialog_permission_deny_msg">需要的权限没有被授予，一些功能可能异常。是否重新授权？</string>
+    <string name="dialog_permission_deny_retry">重新授权</string>
+
+    <string name="dialog_exit">退出</string>
+
+    <string name="card_host_title">我想当房主</string>
+    <string name="card_host_subtitle">创建房间并生成邀请码，与好友一起畅玩</string>
+    <string name="card_guest_title">我想当访客</string>
+    <string name="card_guest_subtitle">输入房主提供的邀请码加入游戏世界</string>
+
+    <string name="toast_disconnect_first">请先结束所有任务</string>
+    <string name="toast_invalid_code">无效的邀请码</string>
+
+    <string name="host_tutorial_text">使用方法：\n - 点击“开始扫描”，扫描游戏端口\n - 打开游戏，在游戏设置中打开“对局域网开放”选项\n - 稍等片刻将自动复制邀请码，若没有自动复制，也可以前往通知或软件中手动复制\n - 将邀请码发送给你的伙伴\n注意事项：\n - 该软件支持离线账户</string>
+    <string name="host_btn_start_scan">开始扫描</string>
+    <string name="host_btn_stop_scan">停止扫描</string>
+    <string name="host_btn_exit">关闭房间</string>
+    <string name="host_btn_stop_task">结束任务</string>
+    <string name="host_btn_copy">复制邀请码</string>
+    <string name="host_text_waiting">房间未创建\n点击开始扫描并按教程创建房间</string>
+    <string name="host_text_scanning">正在扫描局域网端口\n请在游戏设置中打开“对局域网开放”选项</string>
+    <string name="host_text_hosting">房间已创建\n邀请码：%s</string>
+    <string name="host_text_exception">房间已关闭\n原因：%s</string>
+    <string name="host_text_exception_fail">连接超时，请检查网络并确保游戏正常运行</string>
+    <string name="host_text_exception_crash">EasyTier 连接已断开，请检查网络</string>
+    <string name="host_text_exception_lost">游戏已退出，自动关闭房间</string>
+
+    <string name="guest_tutorial_text">使用方法：\n - 向房主获取邀请码，并在输入框内输入邀请码\n - 点击“加入房间”，耐心等待\n - 显示已加入房间后，启动游戏，在多人游戏中刷新，找到自动检测到的房间加入即可\n注意事项：\n - 该软件支持离线账户\n - 该软件支持 HMCL (Terracotta) 和 PCL2 CE 的邀请码\n - 使用备用服务器地址加入游戏时，不支持离线账户，自行解决</string>
+    <string name="guest_input_helper">输入邀请码</string>
+    <string name="guest_btn_start">加入房间</string>
+    <string name="guest_btn_exit">退出房间</string>
+    <string name="guest_btn_stop_task">结束任务</string>
+    <string name="guest_btn_copy">复制备用服务器地址</string>
+    <string name="guest_text_waiting">未加入房间\n输入邀请码加入房间</string>
+    <string name="guest_text_connecting">正在连接到服务器\n请耐心等待</string>
+    <string name="guest_text_guesting">已加入房间\n备用服务器地址：%s</string>
+    <string name="guest_text_exception">已断开连接\n原因：%s</string>
+    <string name="guest_text_exception_fail">连接超时，请检查网络并确保房主游戏正常运行</string>
+    <string name="guest_text_exception_crash">EasyTier 连接已断开，请检查网络</string>
+    <string name="guest_text_exception_lost">连接丢失，可能是房主退出了游戏</string>
+
+    <!-- Backend notification text -->
+
+    <string name="enchantnet_notice_lan_scan_title">EnchantNet 扫描中</string>
+    <string name="enchantnet_notice_lan_scan_text">正在扫描局域网端口，请在游戏设置中打开“对局域网开放”选项</string>
+
+    <string name="enchantnet_notice_host_connecting_title">EnchantNet 正在创建房间</string>
+    <string name="enchantnet_notice_host_connecting_text">正在连接至服务器，请耐心等待</string>
+    <string name="enchantnet_notice_host_connected_title">EnchantNet 已连接</string>
+    <string name="enchantnet_notice_host_connected_text">正在以 Host 模式运行</string>
+    <string name="enchantnet_notice_host_fail_title">EnchantNet 创建房间失败</string>
+    <string name="enchantnet_notice_host_fail_text">房间创建失败，请检查网络状态以及游戏是否正常运行</string>
+    <string name="enchantnet_notice_host_crash_title">EnchantNet 已退出</string>
+    <string name="enchantnet_notice_host_crash_text">EasyTier 连接失败，请检查网络并重启</string>
+    <string name="enchantnet_notice_host_lost_title">EnchantNet 已退出</string>
+    <string name="enchantnet_notice_host_lost_text">检测到退出游戏，已自动关闭房间</string>
+    <string name="enchantnet_notice_host_btn_exit">关闭房间</string>
+    <string name="enchantnet_notice_host_btn_copy">复制邀请码</string>
+
+    <string name="enchantnet_notice_guest_connecting_title">EnchantNet 正在加入房间</string>
+    <string name="enchantnet_notice_guest_connecting_text">正在连接至服务器，请耐心等待</string>
+    <string name="enchantnet_notice_guest_connected_title">EnchantNet 已连接</string>
+    <string name="enchantnet_notice_guest_connected_text">正在以 Guest 模式运行</string>
+    <string name="enchantnet_notice_guest_fail_title">EnchantNet 加入房间失败</string>
+    <string name="enchantnet_notice_guest_fail_text">加入房间失败，请检查网络状态以及 Host 端是否正常运行</string>
+    <string name="enchantnet_notice_guest_crash_title">EnchantNet 已退出</string>
+    <string name="enchantnet_notice_guest_crash_text">EasyTier 连接失败，请检查网络并重启</string>
+    <string name="enchantnet_notice_guest_lost_title">EnchantNet 已退出</string>
+    <string name="enchantnet_notice_guest_lost_text">连接丢失，可能是房主关闭了房间</string>
+    <string name="enchantnet_notice_guest_btn_exit">退出房间</string>
+    <string name="enchantnet_notice_guest_motd">EnchantNet 联机大厅</string>
+
+</resources>

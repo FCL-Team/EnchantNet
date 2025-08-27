@@ -1,3 +1,97 @@
 <resources>
-    <string name="app_name">EnchantNet</string>
+    <string name="app_name" translatable="false">EnchantNet</string>
+
+    <!-- Frontend UI text -->
+
+    <string name="bar_host">EnchantNet Host</string>
+    <string name="bar_guest">EnchantNet Guest</string>
+
+    <string name="menu_about">About</string>
+    <string name="menu_back">Back</string>
+
+    <string name="dialog_about_title">About EnchantNet</string>
+    <string name="dialog_about_msg">Version: %s\nDevelopers: %s\n\nEnchantNet is a multiplayer tool for Minecraft: Java Edition on Android. It works with all Android launchers and does not require any multiplayer mods.\nIt is easy to use and interoperates with HMCL (Terracotta) and PCL2 CE - these are key advantages of this app.</string>
+
+    <string name="action_ok">OK</string>
+    <string name="action_copy_invite">Invite code has been copied to the clipboard</string>
+    <string name="action_copy_address">Backup server address has been copied to the clipboard</string>
+
+    <string name="dialog_permission_title">Permissions required</string>
+    <string name="dialog_permission_msg">To ensure EnchantNet’s online features work properly, we need the following permissions:\n\nForeground service (keeps the network connection active)\nDevice connection identifier (used to create or join rooms)\nNotifications (to display connection status)\nIgnore battery optimizations (prevents the system from interrupting the connection in the background)\nVPN permissions (to create a connection)\n\nPlease grant the app these permissions.</string>
+    <string name="dialog_permission_grant">Grant</string>
+
+    <string name="dialog_permission_deny_title">Permission denied</string>
+    <string name="dialog_permission_deny_msg">Required permissions were not granted. Some features may not work. Would you like to try again?</string>
+    <string name="dialog_permission_deny_retry">Retry</string>
+
+    <string name="dialog_exit">Exit</string>
+
+    <string name="card_host_title">I want to be the host</string>
+    <string name="card_host_subtitle">Create a room and generate an invite code to play with friends</string>
+    <string name="card_guest_title">I want to be a guest</string>
+    <string name="card_guest_subtitle">Enter the host’s invite code to join the game world</string>
+
+    <string name="toast_disconnect_first">Please stop all tasks first</string>
+    <string name="toast_invalid_code">Invalid invite code</string>
+
+    <string name="host_tutorial_text">Instructions:\n - Click "Start Scan" to scan the game port\n - Open the game and turn on the &quot;Open to LAN&quot; option in the game settings\n - Wait for a moment and the invite code will be automatically copied. If it is not automatically copied, you can also go to the notification or copy it manually in the software\n - Send the invite code to your friends\nNotes: - This software supports offline accounts</string>
+    <string name="host_btn_start_scan">Start Scan</string>
+    <string name="host_btn_stop_scan">Stop Scan</string>
+    <string name="host_btn_exit">Close Room</string>
+    <string name="host_btn_stop_task">Stop tasks</string>
+    <string name="host_btn_copy">Copy Invite Code</string>
+    <string name="host_text_waiting">The room has not been created\nClick Start Scan and follow the tutorial to create a room.</string>
+    <string name="host_text_scanning">Scanning local network ports\nPlease enable the &quot;Open to LAN&quot; option in your game settings.</string>
+    <string name="host_text_hosting">Room created\nInvite code: %s</string>
+    <string name="host_text_exception">Room closed\nReason: %s</string>
+    <string name="host_text_exception_fail">Connection timed out. Please check your network and make sure the game is running properly.</string>
+    <string name="host_text_exception_crash">EasyTier connection is disconnected, please check the network</string>
+    <string name="host_text_exception_lost">The game has been exited and the room is automatically closed</string>
+
+    <string name="guest_tutorial_text">Instructions:\n - Get an invitation code from the room host and enter it in the input box\n - Click "Join Room" and wait patiently\n - After it shows that you have joined the room, start the game, refresh in multiplayer menu, find the automatically detected room and join it\nNotes: - This software supports offline accounts\n - This software supports invite codes from HMCL (Terracotta) and PCL2 CE\n - When joining the game using the backup server address, offline accounts are not supported. Please solve this problem yourself</string>
+    <string name="guest_edit_hint" translatable="false">XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</string>
+    <string name="guest_input_helper">Enter Invite Code</string>
+    <string name="guest_btn_start">Join Room</string>
+    <string name="guest_btn_exit">Exit Room</string>
+    <string name="guest_btn_stop_task">Stop tasks</string>
+    <string name="guest_btn_copy">Copy Backup Server Address</string>
+    <string name="guest_text_waiting">Not joined the room\nEnter the invite code to join the room</string>
+    <string name="guest_text_connecting">Connecting to the server\nPlease wait patiently</string>
+    <string name="guest_text_guesting">Already joined the room\nBackup server address: %s</string>
+    <string name="guest_text_exception">Disconnected\nReason: %s</string>
+    <string name="guest_text_exception_fail">Connection timed out. Please check the network and make sure the host game is running properly.</string>
+    <string name="guest_text_exception_crash">EasyTier connection is disconnected, please check the network</string>
+    <string name="guest_text_exception_lost">Connection lost, maybe the host quit the game</string>
+
+    <!-- Backend notification text -->
+
+    <string name="enchantnet_notice_lan_scan_title">EnchantNet Scanning</string>
+    <string name="enchantnet_notice_lan_scan_text">Scanning local network ports. Please enable the &quot;Open to LAN&quot; option in your game settings.</string>
+
+    <string name="enchantnet_notice_host_connecting_title">EnchantNet Creating Room</string>
+    <string name="enchantnet_notice_host_connecting_text">Connecting to the server. Please wait.</string>
+    <string name="enchantnet_notice_host_connected_title">EnchantNet Connected</string>
+    <string name="enchantnet_notice_host_connected_text">Running in Host mode.</string>
+    <string name="enchantnet_notice_host_fail_title">EnchantNet Failed to Create Room</string>
+    <string name="enchantnet_notice_host_fail_text">Room creation failed. Please check your network and ensure the game is running.</string>
+    <string name="enchantnet_notice_host_crash_title">EnchantNet Stopped</string>
+    <string name="enchantnet_notice_host_crash_text">EasyTier connection failed. Please check your network and restart.</string>
+    <string name="enchantnet_notice_host_lost_title">EnchantNet Stopped</string>
+    <string name="enchantnet_notice_host_lost_text">Game was detected as closed. The room has been shut down.</string>
+    <string name="enchantnet_notice_host_btn_exit">Close Room</string>
+    <string name="enchantnet_notice_host_btn_copy">Copy Invite Code</string>
+
+    <string name="enchantnet_notice_guest_connecting_title">EnchantNet Joining Room</string>
+    <string name="enchantnet_notice_guest_connecting_text">Connecting to the server. Please wait.</string>
+    <string name="enchantnet_notice_guest_connected_title">EnchantNet Connected</string>
+    <string name="enchantnet_notice_guest_connected_text">Running in Guest mode.</string>
+    <string name="enchantnet_notice_guest_fail_title">EnchantNet Failed to Join Room</string>
+    <string name="enchantnet_notice_guest_fail_text">Join failed. Please check your network and ensure the Host is running.</string>
+    <string name="enchantnet_notice_guest_crash_title">EnchantNet Stopped</string>
+    <string name="enchantnet_notice_guest_crash_text">EasyTier connection failed. Please check your network and restart.</string>
+    <string name="enchantnet_notice_guest_lost_title">EnchantNet Stopped</string>
+    <string name="enchantnet_notice_guest_lost_text">Connection lost. The host may have closed the room.</string>
+    <string name="enchantnet_notice_guest_btn_exit">Leave Room</string>
+    <string name="enchantnet_notice_guest_motd">EnchantNet Lobby</string>
+
 </resources>

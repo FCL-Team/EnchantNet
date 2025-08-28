@@ -11,8 +11,8 @@ android {
         applicationId = "org.fcl.enchantnet"
         minSdk = 26
         targetSdk = 36
-        versionCode = 110
-        versionName = "1.1"
+        versionCode = 120
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

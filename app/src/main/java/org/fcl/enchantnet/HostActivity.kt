@@ -13,13 +13,13 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.R as MaterialR
 import org.fcl.enchantnet.databinding.ActivityHostBinding
 import org.fcl.enchantnetcore.EnchantNet
 import org.fcl.enchantnetcore.state.EnchantNetException
 import org.fcl.enchantnetcore.state.EnchantNetSnapshot
 import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
+import com.google.android.material.R as MaterialR
 
 class HostActivity : AppCompatActivity() {
 

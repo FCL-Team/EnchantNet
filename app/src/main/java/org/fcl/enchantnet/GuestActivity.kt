@@ -13,7 +13,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
-import com.google.android.material.R as MaterialR
 import com.google.android.material.color.MaterialColors
 import org.fcl.enchantnet.databinding.ActivityGuestBinding
 import org.fcl.enchantnetcore.EnchantNet
@@ -23,6 +22,7 @@ import org.fcl.enchantnetcore.state.EnchantNetSnapshot
 import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
 import org.fcl.enchantnetcore.utils.InviteQuickValidator
+import com.google.android.material.R as MaterialR
 
 class GuestActivity : AppCompatActivity() {
 

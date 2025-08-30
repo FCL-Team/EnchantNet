@@ -52,7 +52,6 @@ class HostActivity : AppCompatActivity() {
             net.stop()
         }
 
-        binding.bar.title = getString(R.string.bar_host)
         binding.bar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_back -> {

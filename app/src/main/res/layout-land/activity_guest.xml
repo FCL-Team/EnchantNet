@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/menu_guest"
             app:layout_collapseMode="pin"
-            app:title="@string/bar_guest"
-            app:titleCentered="false" />
+            app:title="@string/bar_guest" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

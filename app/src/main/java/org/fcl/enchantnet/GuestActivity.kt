@@ -55,7 +55,6 @@ class GuestActivity : AppCompatActivity() {
             net.stop()
         }
 
-        binding.bar.title = getString(R.string.bar_guest)
         binding.bar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_back -> {

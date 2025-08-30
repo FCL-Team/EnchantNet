@@ -2,7 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +12,8 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.R as MaterialR
 import org.fcl.enchantnet.databinding.ActivityHostBinding
 import org.fcl.enchantnetcore.EnchantNet
 import org.fcl.enchantnetcore.state.EnchantNetException
@@ -94,7 +95,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.setText(R.string.host_text_waiting)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_host_24)
-                binding.hostStateText.setTextColor(Color.GRAY)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnBackground, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     binding.hostBtnSwitch.isEnabled = false
@@ -113,7 +116,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostProgress.visibility = View.VISIBLE
                 binding.hostStateImage.visibility = View.INVISIBLE
                 binding.hostStateText.setText(R.string.host_text_scanning)
-                binding.hostStateText.setTextColor(Color.BLUE)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnPrimaryContainer, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     EnchantNet.get().stop()
@@ -132,7 +137,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.text = getString(R.string.host_text_hosting, snap.inviteCode)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_connected_24)
-                binding.hostStateText.setTextColor(Color.GREEN)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorPrimary, 0)
+                )
 
                 copyInviteFromSnapshot(snap)
 
@@ -160,7 +167,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.text = getString(R.string.host_text_exception, err)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_exit_room_24)
-                binding.hostStateText.setTextColor(Color.RED)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorError, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     EnchantNet.get().stop()

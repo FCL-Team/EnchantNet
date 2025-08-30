@@ -2,7 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -14,6 +13,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.R as MaterialR
+import com.google.android.material.color.MaterialColors
 import org.fcl.enchantnet.databinding.ActivityGuestBinding
 import org.fcl.enchantnetcore.EnchantNet
 import org.fcl.enchantnetcore.core.RoomKind
@@ -96,7 +97,9 @@ class GuestActivity : AppCompatActivity() {
                 binding.guestStateImage.visibility = View.VISIBLE
                 binding.guestStateText.setText(R.string.guest_text_waiting)
                 binding.guestStateImage.setImageResource(R.drawable.baseline_guest_24)
-                binding.guestStateText.setTextColor(Color.GRAY)
+                binding.guestStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnBackground, 0)
+                )
                 binding.guestInput.setText("")
                 binding.guestInputLayout.visibility = View.VISIBLE
                 binding.guestInputLayout.error = null
@@ -155,7 +158,9 @@ class GuestActivity : AppCompatActivity() {
                     binding.guestProgress.visibility = View.VISIBLE
                     binding.guestStateImage.visibility = View.INVISIBLE
                     binding.guestStateText.setText(R.string.guest_text_connecting)
-                    binding.guestStateText.setTextColor(Color.BLUE)
+                    binding.guestStateText.setTextColor(
+                        MaterialColors.getColor(this, MaterialR.attr.colorOnPrimaryContainer, 0)
+                    )
                 } else {
                     binding.guestBtnCopy.isEnabled = true
                     binding.guestBtnCopy.visibility = View.VISIBLE
@@ -164,7 +169,9 @@ class GuestActivity : AppCompatActivity() {
                     binding.guestStateText.text =
                         getString(R.string.guest_text_guesting, snap.backupServer)
                     binding.guestStateImage.setImageResource(R.drawable.baseline_connected_24)
-                    binding.guestStateText.setTextColor(Color.GREEN)
+                    binding.guestStateText.setTextColor(
+                        MaterialColors.getColor(this, MaterialR.attr.colorPrimary, 0)
+                    )
 
                     binding.guestBtnCopy.setOnClickListener {
                         copyAddressFromSnapshot(snap)
@@ -192,7 +199,9 @@ class GuestActivity : AppCompatActivity() {
                 binding.guestStateImage.visibility = View.VISIBLE
                 binding.guestStateText.text = getString(R.string.guest_text_exception, err)
                 binding.guestStateImage.setImageResource(R.drawable.baseline_exit_room_24)
-                binding.guestStateText.setTextColor(Color.RED)
+                binding.guestStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorError, 0)
+                )
                 binding.guestInput.setText("")
                 binding.guestInputLayout.visibility = View.INVISIBLE
                 binding.guestInputLayout.error = null

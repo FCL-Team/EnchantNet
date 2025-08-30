@@ -56,16 +56,8 @@ class GuestActivity : AppCompatActivity() {
             net.stop()
         }
 
-        binding.bar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_back -> {
-                    onBackPressedDispatcher.onBackPressed()
-                    true
-                }
-
-                else -> false
-            }
-        }
+        setSupportActionBar(binding.bar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         backCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -233,6 +225,13 @@ class GuestActivity : AppCompatActivity() {
             return
 
         copyServerAddress(server)
+    }
+
+    // 重写 onSupportNavigateUp 方法来处理返回按钮的点击事件
+    override fun onSupportNavigateUp(): Boolean {
+        // 当点击返回按钮时，执行此方法
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     override fun onDestroy() {

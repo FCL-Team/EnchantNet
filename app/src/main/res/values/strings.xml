@@ -7,11 +7,10 @@
     <string name="bar_guest">EnchantNet Guest</string>
 
     <string name="menu_about">About</string>
-    <string name="menu_back">Back</string>
 
     <string name="dialog_about_title">About EnchantNet</string>
     <string name="dialog_about_github">GitHub</string>
-    <string name="dialog_about_msg">Version: %s\nDevelopers: %s\n\nEnchantNet is a multiplayer tool for Minecraft: Java Edition on Android. It works with all Android launchers and does not require any multiplayer mods.\nIt is easy to use and interoperates with HMCL (Terracotta) and PCL2 CE - these are key advantages of this app.</string>
+    <string name="dialog_about_msg">Version: %1$s\nDevelopers: %2$s\n\nEnchantNet is a multiplayer tool for Minecraft: Java Edition on Android. It works with all Android launchers and does not require any multiplayer mods.\nIt is easy to use and interoperates with HMCL (Terracotta) and PCL2 CE - these are key advantages of this app.</string>
 
     <string name="action_ok">OK</string>
     <string name="action_copy_invite">Invite code has been copied to the clipboard</string>

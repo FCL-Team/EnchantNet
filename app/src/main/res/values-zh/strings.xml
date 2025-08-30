@@ -7,11 +7,10 @@
     <string name="bar_guest">EnchantNet 访客</string>
 
     <string name="menu_about">关于</string>
-    <string name="menu_back">返回</string>
 
     <string name="dialog_about_title">关于 EnchantNet</string>
     <string name="dialog_about_github">GitHub</string>
-    <string name="dialog_about_msg">版本：%s\n开发者：%s\n\nEnchantNet 是一个适用于 Android 平台的 Minecraft: Java Edition 联机工具，该软件支持所有 Android 启动器，且无需搭配任何联机模组。\n使用方法简单、支持与 HMCL (Terracotta) 和 PCL2 CE 互联，是该软件的优点。</string>
+    <string name="dialog_about_msg">版本：%1$s\n开发者：%2$s\n\nEnchantNet 是一个适用于 Android 平台的 Minecraft: Java Edition 联机工具，该软件支持所有 Android 启动器，且无需搭配任何联机模组。\n使用方法简单、支持与 HMCL (Terracotta) 和 PCL2 CE 互联，是该软件的优点。</string>
 
     <string name="action_ok">确定</string>
     <string name="action_copy_invite">邀请码已复制到剪切板</string>

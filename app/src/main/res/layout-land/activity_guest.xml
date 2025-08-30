@@ -16,7 +16,6 @@
             android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_guest"
             app:layout_collapseMode="pin"
             app:title="@string/bar_guest" />
 

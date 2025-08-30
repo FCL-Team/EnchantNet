@@ -2,7 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -24,10 +23,9 @@ import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
 import org.fcl.enchantnetcore.utils.InviteQuickValidator
 
-@Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
 class GuestActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityGuestBinding
+    private val binding by lazy { ActivityGuestBinding.inflate(layoutInflater) }
     private lateinit var backCallback: OnBackPressedCallback
 
     private val stateListener = object : EnchantNetStateListener {
@@ -48,7 +46,6 @@ class GuestActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
-        binding = ActivityGuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val net = EnchantNet.get()
@@ -65,6 +62,7 @@ class GuestActivity : AppCompatActivity() {
                     onBackPressedDispatcher.onBackPressed()
                     true
                 }
+
                 else -> false
             }
         }
@@ -77,7 +75,11 @@ class GuestActivity : AppCompatActivity() {
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 } else {
-                    Toast.makeText(this@GuestActivity, getString(R.string.toast_disconnect_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@GuestActivity,
+                        getString(R.string.toast_disconnect_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -101,7 +103,7 @@ class GuestActivity : AppCompatActivity() {
                 binding.guestInputLayout.error = null
                 binding.guestInputLayout.helperText = getString(R.string.guest_input_helper)
 
-                binding.guestInput.doOnTextChanged{ text, _, _, _ ->
+                binding.guestInput.doOnTextChanged { text, _, _, _ ->
                     val s = text?.toString().orEmpty()
                     val kind = InviteQuickValidator.quickDetectKind(s)
                     if (kind == RoomKind.INVALID) {
@@ -123,7 +125,10 @@ class GuestActivity : AppCompatActivity() {
                 }
 
                 binding.guestBtnSwitch.setOnClickListener {
-                    if (InviteQuickValidator.quickDetectKind(binding.guestInput.text?.toString().orEmpty()) == RoomKind.INVALID) {
+                    if (InviteQuickValidator.quickDetectKind(
+                            binding.guestInput.text?.toString().orEmpty()
+                        ) == RoomKind.INVALID
+                    ) {
                         Toast.makeText(this, R.string.toast_invalid_code, Toast.LENGTH_SHORT).show()
                     } else {
                         binding.guestBtnSwitch.isEnabled = false
@@ -134,6 +139,7 @@ class GuestActivity : AppCompatActivity() {
                     }
                 }
             }
+
             EnchantNetState.GUESTING -> {
                 val connected = snap.backupServer != null
 
@@ -156,7 +162,8 @@ class GuestActivity : AppCompatActivity() {
                     binding.guestBtnCopy.visibility = View.VISIBLE
                     binding.guestProgress.visibility = View.INVISIBLE
                     binding.guestStateImage.visibility = View.VISIBLE
-                    binding.guestStateText.text = getString(R.string.guest_text_guesting, snap.backupServer)
+                    binding.guestStateText.text =
+                        getString(R.string.guest_text_guesting, snap.backupServer)
                     binding.guestStateImage.setImageResource(R.drawable.baseline_connected_24)
                     binding.guestStateText.setTextColor(Color.GREEN)
 
@@ -169,6 +176,7 @@ class GuestActivity : AppCompatActivity() {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.EXCEPTION -> {
                 var err = "Unknown Error"
                 if (snap.exception == EnchantNetException.START_FAILED)
@@ -196,13 +204,16 @@ class GuestActivity : AppCompatActivity() {
                 }
             }
 
-            EnchantNetState.SCANNING -> { /* Fk this shit */ }
-            EnchantNetState.HOSTING -> { /* Fk this shit */ }
+            EnchantNetState.SCANNING -> { /* Fk this shit */
+            }
+
+            EnchantNetState.HOSTING -> { /* Fk this shit */
+            }
         }
     }
 
     private fun copyServerAddress(address: String) {
-        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val cm = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         cm.setPrimaryClip(ClipData.newPlainText("server_address", address))
         Toast.makeText(this, getString(R.string.action_copy_address), Toast.LENGTH_SHORT).show()
     }

@@ -2,7 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -21,10 +20,9 @@ import org.fcl.enchantnetcore.state.EnchantNetSnapshot
 import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
 
-@Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
 class HostActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHostBinding
+    private val binding by lazy { ActivityHostBinding.inflate(layoutInflater) }
     private lateinit var backCallback: OnBackPressedCallback
 
     private val stateListener = object : EnchantNetStateListener {
@@ -45,7 +43,6 @@ class HostActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
-        binding = ActivityHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val net = EnchantNet.get()
@@ -62,6 +59,7 @@ class HostActivity : AppCompatActivity() {
                     onBackPressedDispatcher.onBackPressed()
                     true
                 }
+
                 else -> false
             }
         }
@@ -75,7 +73,11 @@ class HostActivity : AppCompatActivity() {
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 } else {
-                    Toast.makeText(this@HostActivity, getString(R.string.toast_disconnect_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@HostActivity,
+                        getString(R.string.toast_disconnect_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -103,6 +105,7 @@ class HostActivity : AppCompatActivity() {
                     }, 100)
                 }
             }
+
             EnchantNetState.SCANNING -> {
                 binding.hostBtnSwitch.isEnabled = true
                 binding.hostBtnCopy.isEnabled = false
@@ -117,6 +120,7 @@ class HostActivity : AppCompatActivity() {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.HOSTING -> {
                 if (snap.inviteCode.isNullOrBlank())
                     return
@@ -140,6 +144,7 @@ class HostActivity : AppCompatActivity() {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.EXCEPTION -> {
                 var err = "Unknown Error"
                 if (snap.exception == EnchantNetException.START_FAILED)
@@ -163,12 +168,13 @@ class HostActivity : AppCompatActivity() {
                 }
             }
 
-            EnchantNetState.GUESTING -> { /* Fk this shit */ }
+            EnchantNetState.GUESTING -> { /* Fk this shit */
+            }
         }
     }
 
     private fun copyInviteCode(code: String) {
-        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val cm = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         cm.setPrimaryClip(ClipData.newPlainText("invite_code", code))
         Toast.makeText(this, getString(R.string.action_copy_invite), Toast.LENGTH_SHORT).show()
     }

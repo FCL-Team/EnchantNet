@@ -32,7 +32,7 @@
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide60"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6"
+            app:layout_constraintGuide_percent="0.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

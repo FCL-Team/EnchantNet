@@ -2,8 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.color.MaterialColors
 import org.fcl.enchantnet.databinding.ActivityGuestBinding
 import org.fcl.enchantnetcore.EnchantNet
 import org.fcl.enchantnetcore.core.RoomKind
@@ -23,11 +22,11 @@ import org.fcl.enchantnetcore.state.EnchantNetSnapshot
 import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
 import org.fcl.enchantnetcore.utils.InviteQuickValidator
+import com.google.android.material.R as MaterialR
 
-@Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
 class GuestActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityGuestBinding
+    private val binding by lazy { ActivityGuestBinding.inflate(layoutInflater) }
     private lateinit var backCallback: OnBackPressedCallback
 
     private val stateListener = object : EnchantNetStateListener {
@@ -48,7 +47,6 @@ class GuestActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
-        binding = ActivityGuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val net = EnchantNet.get()
@@ -58,16 +56,8 @@ class GuestActivity : AppCompatActivity() {
             net.stop()
         }
 
-        binding.bar.title = getString(R.string.bar_guest)
-        binding.bar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_back -> {
-                    onBackPressedDispatcher.onBackPressed()
-                    true
-                }
-                else -> false
-            }
-        }
+        setSupportActionBar(binding.bar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         backCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -77,7 +67,11 @@ class GuestActivity : AppCompatActivity() {
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 } else {
-                    Toast.makeText(this@GuestActivity, getString(R.string.toast_disconnect_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@GuestActivity,
+                        getString(R.string.toast_disconnect_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -95,13 +89,15 @@ class GuestActivity : AppCompatActivity() {
                 binding.guestStateImage.visibility = View.VISIBLE
                 binding.guestStateText.setText(R.string.guest_text_waiting)
                 binding.guestStateImage.setImageResource(R.drawable.baseline_guest_24)
-                binding.guestStateText.setTextColor(Color.GRAY)
+                binding.guestStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnBackground, 0)
+                )
                 binding.guestInput.setText("")
                 binding.guestInputLayout.visibility = View.VISIBLE
                 binding.guestInputLayout.error = null
                 binding.guestInputLayout.helperText = getString(R.string.guest_input_helper)
 
-                binding.guestInput.doOnTextChanged{ text, _, _, _ ->
+                binding.guestInput.doOnTextChanged { text, _, _, _ ->
                     val s = text?.toString().orEmpty()
                     val kind = InviteQuickValidator.quickDetectKind(s)
                     if (kind == RoomKind.INVALID) {
@@ -123,7 +119,10 @@ class GuestActivity : AppCompatActivity() {
                 }
 
                 binding.guestBtnSwitch.setOnClickListener {
-                    if (InviteQuickValidator.quickDetectKind(binding.guestInput.text?.toString().orEmpty()) == RoomKind.INVALID) {
+                    if (InviteQuickValidator.quickDetectKind(
+                            binding.guestInput.text?.toString().orEmpty()
+                        ) == RoomKind.INVALID
+                    ) {
                         Toast.makeText(this, R.string.toast_invalid_code, Toast.LENGTH_SHORT).show()
                     } else {
                         binding.guestBtnSwitch.isEnabled = false
@@ -134,6 +133,7 @@ class GuestActivity : AppCompatActivity() {
                     }
                 }
             }
+
             EnchantNetState.GUESTING -> {
                 val connected = snap.backupServer != null
 
@@ -150,15 +150,20 @@ class GuestActivity : AppCompatActivity() {
                     binding.guestProgress.visibility = View.VISIBLE
                     binding.guestStateImage.visibility = View.INVISIBLE
                     binding.guestStateText.setText(R.string.guest_text_connecting)
-                    binding.guestStateText.setTextColor(Color.BLUE)
+                    binding.guestStateText.setTextColor(
+                        MaterialColors.getColor(this, MaterialR.attr.colorOnPrimaryContainer, 0)
+                    )
                 } else {
                     binding.guestBtnCopy.isEnabled = true
                     binding.guestBtnCopy.visibility = View.VISIBLE
                     binding.guestProgress.visibility = View.INVISIBLE
                     binding.guestStateImage.visibility = View.VISIBLE
-                    binding.guestStateText.text = getString(R.string.guest_text_guesting, snap.backupServer)
+                    binding.guestStateText.text =
+                        getString(R.string.guest_text_guesting, snap.backupServer)
                     binding.guestStateImage.setImageResource(R.drawable.baseline_connected_24)
-                    binding.guestStateText.setTextColor(Color.GREEN)
+                    binding.guestStateText.setTextColor(
+                        MaterialColors.getColor(this, MaterialR.attr.colorPrimary, 0)
+                    )
 
                     binding.guestBtnCopy.setOnClickListener {
                         copyAddressFromSnapshot(snap)
@@ -169,6 +174,7 @@ class GuestActivity : AppCompatActivity() {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.EXCEPTION -> {
                 var err = "Unknown Error"
                 if (snap.exception == EnchantNetException.START_FAILED)
@@ -185,7 +191,9 @@ class GuestActivity : AppCompatActivity() {
                 binding.guestStateImage.visibility = View.VISIBLE
                 binding.guestStateText.text = getString(R.string.guest_text_exception, err)
                 binding.guestStateImage.setImageResource(R.drawable.baseline_exit_room_24)
-                binding.guestStateText.setTextColor(Color.RED)
+                binding.guestStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorError, 0)
+                )
                 binding.guestInput.setText("")
                 binding.guestInputLayout.visibility = View.INVISIBLE
                 binding.guestInputLayout.error = null
@@ -196,13 +204,16 @@ class GuestActivity : AppCompatActivity() {
                 }
             }
 
-            EnchantNetState.SCANNING -> { /* Fk this shit */ }
-            EnchantNetState.HOSTING -> { /* Fk this shit */ }
+            EnchantNetState.SCANNING -> { /* Fk this shit */
+            }
+
+            EnchantNetState.HOSTING -> { /* Fk this shit */
+            }
         }
     }
 
     private fun copyServerAddress(address: String) {
-        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val cm = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         cm.setPrimaryClip(ClipData.newPlainText("server_address", address))
         Toast.makeText(this, getString(R.string.action_copy_address), Toast.LENGTH_SHORT).show()
     }
@@ -214,6 +225,13 @@ class GuestActivity : AppCompatActivity() {
             return
 
         copyServerAddress(server)
+    }
+
+    // 重写 onSupportNavigateUp 方法来处理返回按钮的点击事件
+    override fun onSupportNavigateUp(): Boolean {
+        // 当点击返回按钮时，执行此方法
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     override fun onDestroy() {

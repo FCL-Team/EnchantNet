@@ -2,8 +2,6 @@ package org.fcl.enchantnet
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -14,17 +12,18 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.color.MaterialColors
 import org.fcl.enchantnet.databinding.ActivityHostBinding
 import org.fcl.enchantnetcore.EnchantNet
 import org.fcl.enchantnetcore.state.EnchantNetException
 import org.fcl.enchantnetcore.state.EnchantNetSnapshot
 import org.fcl.enchantnetcore.state.EnchantNetState
 import org.fcl.enchantnetcore.state.EnchantNetStateListener
+import com.google.android.material.R as MaterialR
 
-@Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
 class HostActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHostBinding
+    private val binding by lazy { ActivityHostBinding.inflate(layoutInflater) }
     private lateinit var backCallback: OnBackPressedCallback
 
     private val stateListener = object : EnchantNetStateListener {
@@ -45,7 +44,6 @@ class HostActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
-        binding = ActivityHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val net = EnchantNet.get()
@@ -55,16 +53,8 @@ class HostActivity : AppCompatActivity() {
             net.stop()
         }
 
-        binding.bar.title = getString(R.string.bar_host)
-        binding.bar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_back -> {
-                    onBackPressedDispatcher.onBackPressed()
-                    true
-                }
-                else -> false
-            }
-        }
+        setSupportActionBar(binding.bar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         backCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -75,7 +65,11 @@ class HostActivity : AppCompatActivity() {
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 } else {
-                    Toast.makeText(this@HostActivity, getString(R.string.toast_disconnect_first), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@HostActivity,
+                        getString(R.string.toast_disconnect_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -93,7 +87,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.setText(R.string.host_text_waiting)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_host_24)
-                binding.hostStateText.setTextColor(Color.GRAY)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnBackground, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     binding.hostBtnSwitch.isEnabled = false
@@ -103,6 +99,7 @@ class HostActivity : AppCompatActivity() {
                     }, 100)
                 }
             }
+
             EnchantNetState.SCANNING -> {
                 binding.hostBtnSwitch.isEnabled = true
                 binding.hostBtnCopy.isEnabled = false
@@ -111,12 +108,15 @@ class HostActivity : AppCompatActivity() {
                 binding.hostProgress.visibility = View.VISIBLE
                 binding.hostStateImage.visibility = View.INVISIBLE
                 binding.hostStateText.setText(R.string.host_text_scanning)
-                binding.hostStateText.setTextColor(Color.BLUE)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorOnPrimaryContainer, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.HOSTING -> {
                 if (snap.inviteCode.isNullOrBlank())
                     return
@@ -129,7 +129,9 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.text = getString(R.string.host_text_hosting, snap.inviteCode)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_connected_24)
-                binding.hostStateText.setTextColor(Color.GREEN)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorPrimary, 0)
+                )
 
                 copyInviteFromSnapshot(snap)
 
@@ -140,6 +142,7 @@ class HostActivity : AppCompatActivity() {
                     EnchantNet.get().stop()
                 }
             }
+
             EnchantNetState.EXCEPTION -> {
                 var err = "Unknown Error"
                 if (snap.exception == EnchantNetException.START_FAILED)
@@ -156,19 +159,22 @@ class HostActivity : AppCompatActivity() {
                 binding.hostStateImage.visibility = View.VISIBLE
                 binding.hostStateText.text = getString(R.string.host_text_exception, err)
                 binding.hostStateImage.setImageResource(R.drawable.baseline_exit_room_24)
-                binding.hostStateText.setTextColor(Color.RED)
+                binding.hostStateText.setTextColor(
+                    MaterialColors.getColor(this, MaterialR.attr.colorError, 0)
+                )
 
                 binding.hostBtnSwitch.setOnClickListener {
                     EnchantNet.get().stop()
                 }
             }
 
-            EnchantNetState.GUESTING -> { /* Fk this shit */ }
+            EnchantNetState.GUESTING -> { /* Fk this shit */
+            }
         }
     }
 
     private fun copyInviteCode(code: String) {
-        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val cm = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         cm.setPrimaryClip(ClipData.newPlainText("invite_code", code))
         Toast.makeText(this, getString(R.string.action_copy_invite), Toast.LENGTH_SHORT).show()
     }
@@ -180,6 +186,13 @@ class HostActivity : AppCompatActivity() {
             return
 
         copyInviteCode(code)
+    }
+
+    // 重写 onSupportNavigateUp 方法来处理返回按钮的点击事件
+    override fun onSupportNavigateUp(): Boolean {
+        // 当点击返回按钮时，执行此方法
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     override fun onDestroy() {

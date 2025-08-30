@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.fcl.enchantnet.databinding.ActivityMainBinding
 import org.fcl.enchantnetcore.EnchantNet
@@ -226,6 +227,14 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             .setPositiveButton(R.string.action_ok, null)
+            .setNeutralButton(R.string.dialog_about_github) { _, _ ->
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        "https://github.com/FCL-Team/EnchantNet".toUri()
+                    )
+                )
+            }
             .show()
     }
 

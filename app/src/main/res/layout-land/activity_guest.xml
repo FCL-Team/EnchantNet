@@ -16,10 +16,8 @@
             android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_guest"
             app:layout_collapseMode="pin"
-            app:title="@string/bar_guest"
-            app:titleCentered="false" />
+            app:title="@string/bar_guest" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,10 +45,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guide60">
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/guest_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:indeterminate="true"
                 app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/guest_input_layout"
@@ -103,7 +102,8 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

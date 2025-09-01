@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.fcl.enchantnet.databinding.ActivityMainBinding
 import org.fcl.enchantnetcore.EnchantNet
@@ -12,7 +13,7 @@ import org.fcl.enchantnetcore.utils.PermissionUtils
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     // Single PermissionUtils instance (must be created before Activity STARTED)
     private lateinit var pu: PermissionUtils
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Register activity-result launchers early
@@ -203,6 +203,7 @@ class MainActivity : AppCompatActivity() {
                     showAboutDialog()
                     true
                 }
+
                 else -> false
             }
         }
@@ -218,8 +219,22 @@ class MainActivity : AppCompatActivity() {
     private fun showAboutDialog() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_about_title)
-            .setMessage(getString(R.string.dialog_about_msg, BuildConfig.VERSION_NAME, EnchantNet.get().developers))
+            .setMessage(
+                getString(
+                    R.string.dialog_about_msg,
+                    BuildConfig.VERSION_NAME,
+                    EnchantNet.get().developers
+                )
+            )
             .setPositiveButton(R.string.action_ok, null)
+            .setNeutralButton(R.string.dialog_about_github) { _, _ ->
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        "https://github.com/FCL-Team/EnchantNet".toUri()
+                    )
+                )
+            }
             .show()
     }
 

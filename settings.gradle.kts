@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "EnchantNet"
 include(":app")
 include(":EnchantNetCore")
+include(":Terracotta")

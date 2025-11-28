@@ -11,8 +11,8 @@ android {
         applicationId = "org.fcl.enchantnet"
         minSdk = 26
         targetSdk = 36
-        versionCode = 120
-        versionName = "1.2"
+        versionCode = 130
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,8 +41,9 @@ android {
 
 dependencies {
 
-    implementation(project(":EnchantNetCore"))
+    implementation(project(":Terracotta"))
 
+    implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

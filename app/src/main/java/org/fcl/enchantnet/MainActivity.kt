@@ -1,5 +1,6 @@
 package org.fcl.enchantnet
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -7,9 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import net.burningtnt.terracotta.TerracottaAndroidAPI
+import net.burningtnt.terracotta.TerracottaVPNService
+import net.burningtnt.terracotta.utils.PermissionUtils
 import org.fcl.enchantnet.databinding.ActivityMainBinding
-import org.fcl.enchantnetcore.EnchantNet
-import org.fcl.enchantnetcore.utils.PermissionUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -194,6 +196,19 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
+    private val vpnServiceCallback = TerracottaAndroidAPI.VpnServiceCallback {
+        runOnUiThread {
+            startTerracottaVpn()
+        }
+    }
+
+    fun startTerracottaVpn() {
+        val intent = Intent(this, TerracottaVPNService::class.java).apply {
+            action = TerracottaVPNService.ACTION_START
+        }
+        startService(intent)
+    }
+
     private fun initializeUI() {
         binding.appBar.title = getString(R.string.app_name)
 
@@ -207,6 +222,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        TerracottaAndroidAPI.initialize(this, vpnServiceCallback)
 
         binding.cardHost.setOnClickListener {
             startActivity(Intent(this, HostActivity::class.java))
@@ -223,7 +240,7 @@ class MainActivity : AppCompatActivity() {
                 getString(
                     R.string.dialog_about_msg,
                     BuildConfig.VERSION_NAME,
-                    EnchantNet.get().developers
+                    "Burning_TNT, Tungsten"
                 )
             )
             .setPositiveButton(R.string.action_ok, null)
@@ -239,6 +256,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        fun setWaiting(context: Context) {
+            TerracottaAndroidAPI.setWaiting()
+            val intent = Intent(context, TerracottaVPNService::class.java).apply {
+                action = TerracottaVPNService.ACTION_STOP
+            }
+            context.startService(intent)
+        }
+
         private const val KEY_DONE = "permission_flow_done"
         private const val KEY_WAITING_BATTERY = "permission_waiting_battery"
         private const val KEY_NOTIF_GRANTED = "permission_notif_granted"

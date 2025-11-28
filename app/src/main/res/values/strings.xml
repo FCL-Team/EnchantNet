@@ -10,7 +10,7 @@
 
     <string name="dialog_about_title">About EnchantNet</string>
     <string name="dialog_about_github">GitHub</string>
-    <string name="dialog_about_msg">Version: %1$s\nDevelopers: %2$s\n\nEnchantNet is a multiplayer tool for Minecraft: Java Edition on Android. It works with all Android launchers and does not require any multiplayer mods.\nIt is easy to use and interoperates with HMCL (Terracotta) and PCL2 CE - these are key advantages of this app.</string>
+    <string name="dialog_about_msg">Version: %1$s\nDevelopers: %2$s\n\nEnchantNet is a multiplayer tool for Minecraft: Java Edition on Android. The software is based on Terracotta and follows the Scaffolding-MC license. It works with all Android launchers and does not require any multiplayer mods.\nIt is easy to use and interoperates with HMCL (Terracotta) and PCL2 CE - these are key advantages of this app.</string>
 
     <string name="action_ok">OK</string>
     <string name="action_copy_invite">Invite code has been copied to the clipboard</string>
@@ -49,7 +49,7 @@
     <string name="host_text_exception_lost">The game has been exited and the room is automatically closed</string>
 
     <string name="guest_tutorial_text">Instructions:\n - Get an invitation code from the room host and enter it in the input box\n - Click "Join Room" and wait patiently\n - After it shows that you have joined the room, start the game, refresh in multiplayer menu, find the automatically detected room and join it\nNotes: - This software supports offline accounts\n - This software supports invite codes from HMCL (Terracotta) and PCL2 CE\n - When joining the game using the backup server address, offline accounts are not supported. Please solve this problem yourself</string>
-    <string name="guest_edit_hint" translatable="false">XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</string>
+    <string name="guest_edit_hint" translatable="false">U/XXXX-XXXX-XXXX-XXXX</string>
     <string name="guest_input_helper">Enter Invite Code</string>
     <string name="guest_btn_start">Join Room</string>
     <string name="guest_btn_exit">Exit Room</string>
